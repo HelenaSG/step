@@ -1,34 +1,67 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+<!DOCTYPE html>
+<html>
+  <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
     <title>Helena's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-    
   </head>
   <body>
     <div id="content">
-
-       <!/div class="container">
-           <!img src="images/Ariel.gif" width = "600" class="responsive center">
         
-         <!div class="overlay">
-          <!img src="images/name.gif" width = "600" class="responsive center">
-         <!/a>
-        <!/div>
-      <!/div>
-        
-      <img src="images/name.gif" width = "600" class="responsive center">
-      <img src="images/Ariel.gif" width = "600" class="responsive center">
 
-      <div class="navbar">
-        <a href="index.html">Home</a> 
-        <a href="about.html">About</a> 
-        <a href="projects.html">Projects</a>
-        <a href="resume.pdf">Resume</a>
-      </div>
+        <div class="main" id="home">
+            <img src="images/name.gif" width = "600" class="responsive center">
+            <img src="images/Ariel.gif" width = "600" class="responsive center">
+        </div>
+
+        <div class="main" id="about">
+            <h1>🌸 About Helena 🌸</h1>
+            <p>I am a rising junior at Smith College studying Computer Science and Mathematics.</p>
+            <p>Click here to get a random fact of me:</p>
+            <button onclick="addRandomFact()"> 🎠 </button>
+            <div id="fact-container"></div>
+            
+            <img src="images/lena-1.JPG" class="responsive center">
+            <img src="images/lena-3.JPG" class="responsive center">
+            <img src="images/lena-4.JPG" class="responsive center">
+        </div>
+
+        <div class="main" id="projects">
+            <h1> Projects </h1>
+            <p>Here are some fun projects of mine!</p>
+            <div class="img-magnifier-container responsive center">
+                <img id="myimage1" src="images/p1.png" width="1040" height="780" alt="poster1">
+            </div>
+
+            <script>
+                /* Execute the magnify function: */
+                magnify("myimage1", 2);
+                /* Specify the id of the image, and the strength of the magnifier glass: */
+            </script>
+
+            
+            <div class="img-magnifier-container responsive center">
+                <img id="myimage2" src="images/p2.jpeg" width="1040" height="1430" alt="poster2">
+            </div>
+
+            <script>
+                /* Execute the magnify function: */
+                magnify("myimage2", 2);
+                /* Specify the id of the image, and the strength of the magnifier glass: */
+            </script>
+        </div>
+
+        <div class="navbar">
+            <a href="#home">Home</a> 
+            <a href="#about">About</a> 
+            <a href="#projects">Projects</a>
+            <a href="resume.pdf">Resume</a>
+        </div>
      
     </div>
   </body>

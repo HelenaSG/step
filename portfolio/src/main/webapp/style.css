@@ -14,8 +14,23 @@ body {
   margin-top: 20px;
 }
 
-html{
+/*Smooth Scrolling*/
+html {
+  scroll-behavior: smooth;
 }
+
+#home {
+  background-color: aliceblue;
+}
+
+#about {
+  background-color: #f3f3083a;
+}
+
+#projects {
+  background-color: aliceblue;
+}
+
 
 /*image to scale on responsiveness d*/
 img {
@@ -46,5 +61,59 @@ img {
   cursor: none;
   width: 200px;
   height: 200px;
+}
+
+
+/* sticky navbar at the bottom of the page */
+.navbar {
+  background-color: #333;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+/* Style the links inside the navigation bar */
+.navbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  border-bottom: 3px solid transparent;
+}
+
+.navbar a:hover {
+  border-bottom: 3px solid red;
+}
+
+.navbar a.active {
+  border-bottom: 3px solid red;
+}
+
+/* not using */
+/* The overlay effect (full height and width) - lays on top of the container and over the image */
+.overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  transition: .3s ease;
+}
+
+/* When you mouse over the container, fade in the overlay icon*/
+.container:hover .overlay {
+  opacity: 1;
+}
+
+/* When you move the mouse over the icon, change color */
+.fa-user:hover {
+  color: #eee;
 }
 
