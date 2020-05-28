@@ -1,18 +1,50 @@
+h1 {text-align: center;}
+div {text-align: center;}
+
 #content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
-}
-
-#greeting-container {
-  margin-top: 20px;
 }
 
 body {
   background-color: aliceblue;
 }
 
+#greeting-container {
+  margin-top: 20px;
+}
+
+html{
+}
+
+/*image to scale on responsiveness d*/
 img {
   padding: 30px;
+}
+
+.responsive {
+  width: 50%;
+  height: auto;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+* {box-sizing: border-box;}
+
+.img-magnifier-container {
+  position:relative;
+}
+
+.img-magnifier-glass {
+  position: absolute;
+  border: 3px solid aliceblue;
+  border-radius: 50%;
+  cursor: none;
+  width: 200px;
+  height: 200px;
 }
 
