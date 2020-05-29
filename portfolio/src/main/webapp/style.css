@@ -1,29 +1,36 @@
+/* responsive and colored texts */
 h1 {
     font-size: 2vw;
     text-align: center;
     color: pink;
-    }
+}
+
 div {
     font-size: 1.5vw;
     text-align: center;
     color: white;
-    } 
+} 
+
 h2 {
     font-size: 5vw;
     text-align: left;
     color: white;
-    }
+}
+
 h3 {
     font-size: 4vw;
     text-align: left;
     color: rgba(211, 211, 211, 0.877);
-    }
+}
+
 h4 {
     font-size: 1.5vw;
     text-align: left;
-    color: pink; }
-.fact {
-  color: #909090;
+    color: pink; 
+}
+
+.note {
+  color: #A8A8A8;
   text-align: center;
   font-size: 1vw;
 }
@@ -38,17 +45,37 @@ body {
 }
 
 #fact-container {
-  margin-top: 20px;
+  margin-top: 1vw;
 }
 
-/*Smooth Scrolling*/
+.profile{
+    border-radius: 50%;
+    width: 30%;
+    height: auto;
+}
+
+.button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 0.3vw 0.3vw;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+
+/*smooth scrolling pages*/
 html {
   scroll-behavior: smooth;
 }
 
-#home { 
-  background-color: #606060;
+#home {  
   height: 100vh;
+  background-image: url("images/road.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover; 
 }
 
 #about {
@@ -60,9 +87,9 @@ html {
 }
 
 
-/*image to scale on responsiveness d*/
+/*responsive images*/
 img {
-  padding: 30px;
+  padding: 1vw;
   width: 100%;
   display: block;
 }
@@ -71,7 +98,6 @@ img {
   width: 50%;
   height: auto;
 }
-
 
 .center {
   display: block;
@@ -82,7 +108,7 @@ img {
 * {box-sizing: border-box;}
 
 
-/* sticky navbar at the bottom of the page */
+/* sticky navbar at the bottom */
 .navbar {
   width: 100%;
   background-color: #333;
@@ -91,14 +117,13 @@ img {
   bottom: 0;
 }
 
-/* format links inside navbar */
 .navbar a {
-  font-size: 1.5vw;
+  font-size: 1vw;
   float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 17px 20px;
+  padding: 1vw 1vw;
   text-decoration: none;
   border-bottom: 3px solid transparent;
 }
@@ -111,6 +136,14 @@ img {
   border-bottom: 4px solid hotpink;
 }
 
+a[href*="github.com/"] {
+background:url("images/git.png") no-repeat left center;
+background-position: center center;
+background-size: 80%;
+padding-top:2.1vw;
+}
+
+/* image/text overlay */
 .poster {
   display: block;
   width: 100%;
@@ -120,6 +153,7 @@ img {
 .posterContainer {
   position: relative;
   width: 50%;
+  cursor: pointer;
 }
 
 .overlay {
@@ -136,7 +170,7 @@ img {
 }
 
 .posterContainer:hover .overlay {
-  opacity: 0.9;
+  opacity: 0.95;
 }
 
 .intro {
@@ -151,26 +185,27 @@ img {
   text-align: center;
 }
 
-
-.image-stack::after {
+/* stack image using grid */
+.grid::after {
     content: ' ';
     display: table;
     clear: both;
-  }
+}
 
-  .image-stack__item--top {
+.topItem {
       float: left;
       width: 90%;
       margin-right: -100%;
       position: relative;
       z-index: 1; 
-  }
+}
 
-  .image-stack__item--bottom {
+.bottomItem {
       float: right;
       width: 75%;
-  }
+}
 
+/* flex box for main page */
 .flexbox {
   display: flex;  
   flex-flow: row wrap;
@@ -178,7 +213,7 @@ img {
 }
 
 .flexbox > * {
-  padding: 10px;
+  padding: 0.5vw;
   flex: 1 100%;
 }
 
@@ -198,7 +233,6 @@ img {
   .aside   { order: 2; }
   .footer  { order: 3; }
 }
-
 
 .mainContainer {
   position: relative;
