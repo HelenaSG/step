@@ -41,6 +41,11 @@ img {
   width: 50%;
   height: auto;
 }
+.responsive2 {
+  width: 80%;
+  height: auto;
+}
+
 
 .center {
   display: block;
@@ -66,31 +71,71 @@ img {
 
 /* sticky navbar at the bottom of the page */
 .navbar {
+  width: 100%;
   background-color: #333;
   overflow: hidden;
   position: fixed;
   bottom: 0;
-  width: 100%;
 }
 
-/* Style the links inside the navigation bar */
+/* format links inside navbar */
 .navbar a {
+  font-size: 20px;
   float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 17px 20px;
   text-decoration: none;
-  font-size: 17px;
   border-bottom: 3px solid transparent;
 }
 
 .navbar a:hover {
-  border-bottom: 3px solid red;
+  border-bottom: 4px solid rgb(255, 0, 179);
 }
 
 .navbar a.active {
-  border-bottom: 3px solid red;
+  border-bottom: 4px solid rgb(255, 0, 179);
+}
+
+.poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.posterContainer {
+  position: relative;
+  width: 50%;
+}
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  opacity: 0;
+  transition: 1s ease;
+  background-color: #008CBA;
+}
+
+.posterContainer:hover .overlay {
+  opacity: 0.9;
+}
+
+.intro {
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 /* not using */
