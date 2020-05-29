@@ -15,9 +15,11 @@
 /**
  * Adds a random fact to the page.
  */
+var current = 0;
+
 function addRandomFact() {
   const facts =
-      ['I\'m a Horror Movie Junkie🙇🏻‍♀', 
+      ['I love watching horror movies with my friends.', 
       'I have a dance crew of five💃🏻, and our team name is Osmosis!', 
       'I\'m a Pisces♓️ - the dreamer and artist of the zodiac.', 
       'I joined the theatre as a light-board operator.', 
@@ -28,7 +30,15 @@ function addRandomFact() {
       'My favorite fruit is 🍓🍓🍓'];
 
   // Pick a random fact.
-  const fact = facts[Math.floor(Math.random() * facts.length)];
+  var update = Math.floor(Math.random() * facts.length);
+
+  if (update == current) {
+      while (update == current) {
+          update = Math.floor(Math.random() * facts.length);
+      }
+  }
+  current = update;
+  const fact = facts[current];
 
   // Add it to the page.
   const factContainer = document.getElementById('fact-container');

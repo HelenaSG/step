@@ -35,6 +35,8 @@ html {
 /*image to scale on responsiveness d*/
 img {
   padding: 30px;
+  width: 100%;
+  display: block;
 }
 
 .responsive {
@@ -136,4 +138,45 @@ img {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   text-align: center;
+}
+
+
+.image-stack::after {
+    content: ' ';
+    display: table;
+    clear: both;
+  }
+
+  .image-stack__item--top {
+      float: left;
+      width: 90%;
+      margin-right: -100%;
+      position: relative;
+      z-index: 1; // tells the browser to make this image on top
+  }
+
+  .image-stack__item--bottom {
+      float: right;
+      width: 75%;
+  }
+
+@supports (display: grid) {
+  .image-stack {
+    display: grid;
+    position: relative; // imperative for the overlapping to work
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .image-stack__item--bottom {
+    grid-column: 7 / -1;
+    grid-row: 1;
+    width: 50%;
+  }
+
+  .image-stack__item--top {
+    grid-row: 1;
+    grid-column: 1 / span 2;
+    padding-top: 20%; // slightly arbitrary, keeps proportion once resized
+    width: 50%;
+  }
 }
