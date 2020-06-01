@@ -12,55 +12,93 @@
   </head>
   <body>
     <div id="content">
-        
+
+        <!-- main page -->
 
         <div class="main" id="home">
-            <img src="images/name.gif" width = "600" class="responsive center">
-            <img src="images/Ariel.gif" width = "600" class="responsive center">
+            <div class="flexbox">
+
+            <article class="mid">
+                <div class="mainContainer center">
+                    <h4>Hi, my name is</h4>  
+                    <h2>Helena Shangguan</h2>  
+                    <h3>I'm an aspiring software engineer.</h3>  
+                </div>
+            </article>
+           
+            <aside class="aside">
+                <div class="container center">
+                    <div class="grid">
+                        <div class="topItem center">
+                            <img src="images/name.gif" >
+                        </div>
+                        <div class="bottomItem center">
+                            <img src="images/Ariel.gif" >
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <footer class="footer">
+                Wherever life cultivates, bloom with grace.
+            </footer>
+
+            </div>
         </div>
 
+        <!-- about me -->
         <div class="main" id="about">
-            <h1>🌸 About Helena 🌸</h1>
+
+            <h1>🌸 About Me 🌸</h1>
+
+            <img src="images/lena-2.JPG" class="center profile">
+
             <p>I am a rising junior at Smith College studying Computer Science and Mathematics.</p>
-            <p>Click here to get a random fact of me:</p>
-            <button onclick="addRandomFact()"> 🎠 </button>
+            <p class = "note">click here to get a random fact of me:</p>
+            <button class = "button" onclick="addRandomFact()"> 🎠 </button>
             <div id="fact-container"></div>
-            
-            <img src="images/lena-1.JPG" class="responsive center">
-            <img src="images/lena-3.JPG" class="responsive center">
-            <img src="images/lena-4.JPG" class="responsive center">
+
+            <img src="images/lena-1.JPG" class="responsive center round">
+            <img src="images/lena-3.JPG" class="responsive center round">
+      
         </div>
 
+        <!-- projects -->
         <div class="main" id="projects">
+    
             <h1> Projects </h1>
-            <p>Here are some fun projects of mine!</p>
-            <div class="img-magnifier-container responsive center">
-                <img id="myimage1" src="images/p1.png" width="1040" height="780" alt="poster1">
+
+            <p>Voronoi Diagram Image Converter</p>
+            <p class = "note">hover the cursor over to see a description</p>
+            <div class="posterContainer center">
+                <img src="images/p1.png" alt="ImageConverter" class="poster responsive">
+                <div class="overlay">
+                    <div class="intro">
+                    This project is a Mathematica implementation that changes images to Voronoi diagrams. Generally, the code takes in a local image as input, converts it into a binary image, generates random points from the binary image, changes the points to Voronoi diagrams, then colors the diagram as the final output.
+                On the first row are the input images, and on the second row are the Voronoi diagrams generated from 500 randomly selected sites (shown as orange dots). The third row shows the artistically colored images. The last two rows are results of 5000 or 10000 sites.
+                    </div>
+                </div>
             </div>
 
-            <script>
-                /* Execute the magnify function: */
-                magnify("myimage1", 2);
-                /* Specify the id of the image, and the strength of the magnifier glass: */
-            </script>
-
-            
-            <div class="img-magnifier-container responsive center">
-                <img id="myimage2" src="images/p2.jpeg" width="1040" height="1430" alt="poster2">
+            <p>Handwritten Syriac Text Recognition</p>
+            <div class="posterContainer center ending">
+                <img src="images/p2.png" alt="SyriacHTR" class="poster responsive">
+                <div class="overlay">
+                    <div class="intro">
+                    My faculty adviser, Nicholas Howe, and I used methods based upon deep learning and applied Harald Scheidl’s HTR system to Syriac. The implementation depends on numpy, cv2, and tensorflow-gpu. It consists of five CNN layers, two RNN layers, and the CTC loss and decoding layer. The Neural Network model is a word-level recognizer, which handles images of segmented words. It is able to correctly recognize 99% of the words from the Syriac Genesis dataset. The character error rate of the saved model is 0.173177%. The recognizer can produce transcript predictions for RGB images, gray-scale images, and binary images.
+                    </div>
+                </div>
             </div>
 
-            <script>
-                /* Execute the magnify function: */
-                magnify("myimage2", 2);
-                /* Specify the id of the image, and the strength of the magnifier glass: */
-            </script>
         </div>
 
+        <!-- navigation bar -->
         <div class="navbar">
             <a href="#home">Home</a> 
             <a href="#about">About</a> 
             <a href="#projects">Projects</a>
             <a href="resume.pdf">Resume</a>
+            <a href="https://github.com/HelenaSG"></a>
         </div>
      
     </div>

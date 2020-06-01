@@ -1,5 +1,43 @@
-h1 {text-align: center;}
-div {text-align: center;}
+/* responsive and colored texts */
+h1 {
+    font-size: 2vw;
+    text-align: center;
+    color: pink;
+}
+
+div {
+    font-size: 1.5vw;
+    text-align: center;
+    color: white;
+} 
+
+h2 {
+    font-size: 5vw;
+    text-align: left;
+    color: white;
+}
+
+h3 {
+    font-size: 4vw;
+    text-align: left;
+    color: rgba(211, 211, 211, 0.877);
+}
+
+h4 {
+    font-size: 1.5vw;
+    text-align: left;
+    color: pink; 
+}
+
+.mainContainer {
+    margin: 11vw 6vw 1vw 7vw;
+}
+
+.note {
+  color: #A8A8A8;
+  text-align: center;
+  font-size: 1vw;
+}
 
 #content {
   margin-left: auto;
@@ -7,34 +45,64 @@ div {text-align: center;}
 }
 
 body {
-  background-color: aliceblue;
+  background-color: #404040;
 }
 
-#greeting-container {
-  margin-top: 20px;
+#fact-container {
+  margin-top: 1vw;
+  padding-bottom: 3vw;
 }
 
-/*Smooth Scrolling*/
+.profile{
+    border-radius: 50%;
+    width: 30%;
+    height: auto;
+}
+
+.button {
+  background-color: #f2f2f2;
+  border: none;
+  padding: 0.3vw 0.3vw;
+  text-align: center;
+  display: inline-block;
+  font-size: 1.5vw;
+  cursor: pointer;
+}
+
+/*smooth scrolling pages*/
 html {
   scroll-behavior: smooth;
 }
 
-#home {
-  background-color: aliceblue;
+#home {  
+  height: 100vh;
+  background-image: url("images/road.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover; 
 }
 
 #about {
-  background-color: #f3f3083a;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+  background-color: #606060;
 }
 
 #projects {
-  background-color: aliceblue;
+  margin-top: 2vw;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+  margin-bottom: 5vw;
+  background-color: #606060;
 }
 
 
-/*image to scale on responsiveness d*/
+/*responsive images*/
 img {
-  padding: 30px;
+  padding: 1vw;
+  width: 100%;
+  display: block;
 }
 
 .responsive {
@@ -50,70 +118,152 @@ img {
 
 * {box-sizing: border-box;}
 
-.img-magnifier-container {
-  position:relative;
-}
 
-.img-magnifier-glass {
-  position: absolute;
-  border: 3px solid aliceblue;
-  border-radius: 50%;
-  cursor: none;
-  width: 200px;
-  height: 200px;
-}
-
-
-/* sticky navbar at the bottom of the page */
+/* sticky navbar at the bottom */
 .navbar {
+  width: 100%;
   background-color: #333;
   overflow: hidden;
   position: fixed;
   bottom: 0;
-  width: 100%;
 }
 
-/* Style the links inside the navigation bar */
 .navbar a {
+  font-size: 1vw;
   float: left;
   display: block;
   color: #f2f2f2;
   text-align: center;
-  padding: 14px 16px;
+  padding: 1vw 1vw;
   text-decoration: none;
-  font-size: 17px;
   border-bottom: 3px solid transparent;
 }
 
 .navbar a:hover {
-  border-bottom: 3px solid red;
+  border-bottom: 4px solid hotpink;
 }
 
 .navbar a.active {
-  border-bottom: 3px solid red;
+  border-bottom: 4px solid hotpink;
 }
 
-/* not using */
-/* The overlay effect (full height and width) - lays on top of the container and over the image */
+a[href*="github.com/"] {
+background:url("images/git.png") no-repeat left center;
+background-position: center center;
+background-size: 80%;
+padding-top:2.1vw;
+}
+
+/* image/text overlay */
+.poster {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.posterContainer {
+  position: relative;
+  width: 50%;
+  cursor: pointer;
+}
+
 .overlay {
   position: absolute;
+  width: 100%;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   height: 100%;
-  width: 100%;
   opacity: 0;
-  transition: .3s ease;
+  transition: 1s ease;
+  background-color: gray;
 }
 
-/* When you mouse over the container, fade in the overlay icon*/
-.container:hover .overlay {
-  opacity: 1;
+.posterContainer:hover .overlay {
+  opacity: 0.95;
 }
 
-/* When you move the mouse over the icon, change color */
-.fa-user:hover {
-  color: #eee;
+.intro {
+  position: absolute;
+  color: white;
+  font-size: 1vw;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
+/* stack image using grid */
+.grid::after {
+    content: ' ';
+    display: table;
+    clear: both;
+}
+
+.topItem {
+      float: left;
+      width: 90%;
+      margin-right: -100%;
+      position: relative;
+      z-index: 1; 
+}
+
+.bottomItem {
+      float: right;
+      width: 75%;
+}
+
+/* flex box for main page */
+.flexbox {
+  display: flex;  
+  flex-flow: row wrap;
+  font-weight: bold;
+}
+
+.flexbox > * {
+  padding: 0.5vw;
+  flex: 1 100%;
+}
+
+.footer {
+  color: 		#909090;
+  text-align: right;
+  font-size: 1vw;
+}
+
+@media all and (min-width: 600px) {
+  .aside { flex: 1 0 0; }
+}
+
+@media all and (min-width: 800px) {
+  .mid    { flex: 5 0px; }
+  .mid    { order: 1; }
+  .aside   { order: 2; }
+  .footer  { order: 3; }
+}
+
+.mainContainer {
+  position: relative;
+  width: 50%;
+}
+
+/* image gallery */
+
+.imgGallery {
+  width: 40vw;
+  margin: 4vw;
+  border: 0.3vw #777 solid;
+  float: left;
+}
+
+.imgGallery:hover {
+  border: 0.3vw #ccc solid;
+}
+
+.imgText {
+  padding: 1vw;
+  text-align: center;
+}
