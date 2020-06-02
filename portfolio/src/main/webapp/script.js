@@ -45,8 +45,18 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-function getHelloUsingArrowFunctions() {
-  fetch('/data').then(response => response.text()).then((quote) => {
-    document.getElementById('hello-container').innerHTML  = quote;
+//step1
+// function getHelloUsingArrowFunctions() {
+//   fetch('/data').then(response => response.text()).then((quote) => {
+//     document.getElementById('hello-container').innerHTML  = quote;
+//   });
+// }
+
+//step3
+function getServerStats() {
+  fetch('/data').then(response => response.json()).then((array) => {
+    // create HTML content
+    const statsListElement = document.getElementById('server-stats-container');
+    statsListElement.innerHTML = "<p>"+array[0]+" "+array[1]+" "+array[2]+"</p>";
   });
 }
