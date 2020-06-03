@@ -46,11 +46,20 @@
             </div>
         </div>
 
-        <button onclick="getHelloUsingArrowFunctions()">Fetch!</button>
-        <div id="hello-container"></div>
+        <body onload="getComments()">
+            
+             <form action="/data" method="POST">
 
-        <button onclick="getServerStats()">Pod Tigers!</button>
-        <ul id="server-stats-container"></ul>
+                <p>Leave a comment:</p>
+                <textarea name="text-input"></textarea>
+                <br/><br/>
+
+                <input type="submit" />
+            </form>
+
+            <ul id="history"></ul>
+        
+        </body>
         
         <!-- about me -->
         <div class="main" id="about">

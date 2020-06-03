@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.Arrays;
 import com.google.gson.Gson;
 
 
@@ -27,28 +28,42 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  ArrayList<String> comments = new ArrayList<String>();
+  
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    //step1
-    //response.setContentType("text/html;");
-    //response.getWriter().println("<p>Hello Helena!</p>");
-
-    //step3
-    ArrayList<String> pod = new ArrayList<String>();
-    pod.add("Neriyah");
-    pod.add("Evie");
-    pod.add("Helena");
-
-    // Convert the server stats to JSON
-    String json = convertToJsonUsingGson(pod);
-
     // Send the JSON as the response
-    response.setContentType("application/json;");
+    response.setContentType("application/json");
+    String json = new Gson().toJson(comments);
     response.getWriter().println(json);
   }
 
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String comment = getParameter(request, "text-input", "");
 
-  private String convertToJsonUsingGson(ArrayList<String> list) {
+    // Add to ArrayList
+    comments.add(comment);
+
+    // Convert the comments array to JSON
+    String json = convertToJson(comments);
+
+    // Redirect back to the HTML page.
+    response.sendRedirect("/index.html");
+  }
+
+  //return the request parameter, or the default value if the parameter was not specified by the client
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }
+
+  //Convert an arrayList to JSON
+  private String convertToJson(ArrayList<String> list) {
     Gson gson = new Gson();
     String json = gson.toJson(list);
     return json;
@@ -56,6 +71,3 @@ public class DataServlet extends HttpServlet {
 
 
 }
-
-
-

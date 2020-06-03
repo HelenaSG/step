@@ -45,18 +45,22 @@ function addRandomFact() {
   factContainer.innerText = fact;
 }
 
-//step1
-// function getHelloUsingArrowFunctions() {
-//   fetch('/data').then(response => response.text()).then((quote) => {
-//     document.getElementById('hello-container').innerHTML  = quote;
-//   });
-// }
-
-//step3
-function getServerStats() {
+/**
+ * Adds comments the page.
+ */
+function getComments() {
   fetch('/data').then(response => response.json()).then((array) => {
     // create HTML content
-    const statsListElement = document.getElementById('server-stats-container');
-    statsListElement.innerHTML = "<p>"+array[0]+" "+array[1]+" "+array[2]+"</p>";
+    const historyEL = document.getElementById('history');
+    historyEL.innerHTML = createListElement(array);
   });
+}
+
+//Add <li> tag for each index of the array.
+function createListElement(array) {
+  var output = "";
+  for (index = 0; index < array.length; index++) { 
+    output = output + "<li>" + array[index] + "</li>\n";
+  }   
+  return output;
 }
