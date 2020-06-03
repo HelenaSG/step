@@ -27,59 +27,26 @@ import java.util.Arrays;
 import com.google.gson.Gson;
 
 
-/** Servlet that returns some example content. TODO: modify this file to handle comments data */
+/** Servlet that handles comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
-  ArrayList<String> comments = new ArrayList<String>();
-  
-  @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Send the JSON as the response
-    response.setContentType("application/json");
-    String json = new Gson().toJson(comments);
-    response.getWriter().println(json);
-  }
-
-  @Override
+    @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    // Get the input from the form.
-    String comment = getParameter(request, "text-input", "");
+
+    //Retrieve user's input
+    String content = request.getParameter("content");
     long timestamp = System.currentTimeMillis();
 
-    // // Add to ArrayList
-    // comments.add(comment);
-
-    // // Convert the comments array to JSON
-    // String json = convertToJson(comments);
-    
-    //Save comments in Datastore
-    Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("content", comment);
-    commentEntity.setProperty("timestamp", timestamp);
+    //Save as an entity with kind "Comments" in Datastore
+    Entity cmtEntity = new Entity("Comments"); 
+    cmtEntity.setProperty("content", content);
+    cmtEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(commentEntity);
+    datastore.put(cmtEntity);
 
-    // Redirect back to the HTML page.s
     response.sendRedirect("/index.html");
   }
-
-  //return the request parameter, or the default value if the parameter was not specified by the client
-  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
-    String value = request.getParameter(name);
-    if (value == null) {
-      return defaultValue;
-    }
-    return value;
-  }
-
-  //Convert an arrayList to JSON
-  private String convertToJson(ArrayList<String> list) {
-    Gson gson = new Gson();
-    String json = gson.toJson(list);
-    return json;
-  }
-
 
 }
