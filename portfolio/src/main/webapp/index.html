@@ -14,7 +14,6 @@
     <div id="content">
 
         <!-- main page -->
-
         <div class="main" id="home">
             <div class="flexbox">
 
@@ -46,21 +45,6 @@
             </div>
         </div>
 
-        <body onload="getComments()">
-            
-             <form action="/data" method="POST">
-
-                <p>Leave a comment:</p>
-                <textarea name="text-input"></textarea>
-                <br/><br/>
-
-                <input type="submit" />
-            </form>
-
-            <ul id="history"></ul>
-        
-        </body>
-        
         <!-- about me -->
         <div class="main" id="about">
 
@@ -107,6 +91,23 @@
 
         </div>
 
+        <!-- comment -->
+        <div class="main" id="comments">
+            <body onload="loadComments()">
+
+                <p>Leave a comment:</p>
+
+                <form method="POST" action="/data">
+                    <textarea name="content"></textarea>
+                    <br/>
+                    <button>Submit</button>
+                </form>
+
+                <ul id="comment-list"></ul>
+
+            </body>
+        </div>
+     
         <!-- navigation bar -->
         <div class="navbar">
             <a href="#home">Home</a> 
@@ -115,7 +116,6 @@
             <a href="resume.pdf">Resume</a>
             <a href="https://github.com/HelenaSG"></a>
         </div>
-     
     </div>
   </body>
 </html>

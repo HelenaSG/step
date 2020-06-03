@@ -93,8 +93,15 @@ html {
   margin-top: 2vw;
   padding-top: 5vw;
   padding-bottom: 5vw;
-  margin-bottom: 5vw;
+  /* margin-bottom: 5vw; */
   background-color: #606060;
+}
+
+#comments {
+  margin-top: 2vw;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+  margin-bottom: 5vw;
 }
 
 
@@ -268,10 +275,19 @@ padding-top:2.1vw;
   text-align: center;
 }
 
-#hello-container {
-  margin-top: 1vw;
+/* comment */
+#comment-list {
+  list-style-type: none;
 }
 
-#server-stats-container {
-  margin-top: 1vw;
+.comment {
+  border: thin solid black;
+  display: flex;
+  margin: 0.5vw;
+  padding: 0.5vw;
+  width: 15vw;
+}
+
+.comment span {
+  flex-grow: 1;
 }
