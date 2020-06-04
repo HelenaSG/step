@@ -22,6 +22,7 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.gson.Gson;
 import com.google.sps.data.Comment;//import Comment class
+import com.google.appengine.api.datastore.FetchOptions;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,16 +37,23 @@ public class ListCommentsServlet extends HttpServlet {
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    
-    //Load the entity by kind 
+
+    int max = 3;
+    int userChoice = getUserChoice(request);
+    if (userChoice != -1) {
+        max = userChoice;
+    }
+    System.out.println("max"+max);
+
     Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    PreparedQuery results = datastore.prepare(query);
-
+    //PreparedQuery results = datastore.prepare(query);
+    List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(max));
+    
     //Get properties of the entity
     List<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable()) {
+    for (Entity entity : results){
       long id = entity.getKey().getId();
       String content = (String) entity.getProperty("content");
       long timestamp = (long) entity.getProperty("timestamp");
@@ -58,7 +66,31 @@ public class ListCommentsServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
 
-    response.setContentType("application/json;");
+    response.setContentType("application/json");
     response.getWriter().println(json);
   }
+
+  /** Returns the choice entered by the user, or -1 if the choice was invalid. */
+  private int getUserChoice(HttpServletRequest request) {
+    // Get the input from the form.
+    String userChoiceString = request.getParameter("user-choice");
+    System.out.println("userChoiceString"+userChoiceString);
+    // Convert the input to an int.
+    int userChoice;
+    try {
+      userChoice = Integer.parseInt(userChoiceString);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + userChoiceString);
+      return -1;
+    }
+
+    // Check that the input is between 1 and 50.
+    if (userChoice < 1 || userChoice > 50) {
+      System.err.println("user choice is out of range: " + userChoiceString);
+      return -1;
+    }
+
+    return userChoice;
+  }
+  
 }

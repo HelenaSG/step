@@ -27,7 +27,7 @@ import java.util.Arrays;
 import com.google.gson.Gson;
 
 
-/** Servlet that handles comments data */
+/** Servlet that handles comments data submitted by users */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
