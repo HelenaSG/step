@@ -43,12 +43,10 @@ public class ListCommentsServlet extends HttpServlet {
     if (userChoice != -1) {
         max = userChoice;
     }
-    System.out.println("max"+max);
 
     Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    //PreparedQuery results = datastore.prepare(query);
     List<Entity> results = datastore.prepare(query).asList(FetchOptions.Builder.withLimit(max));
     
     //Get properties of the entity
@@ -56,9 +54,10 @@ public class ListCommentsServlet extends HttpServlet {
     for (Entity entity : results){
       long id = entity.getKey().getId();
       String content = (String) entity.getProperty("content");
+      String name = (String) entity.getProperty("name");
       long timestamp = (long) entity.getProperty("timestamp");
 
-      Comment comment = new Comment(id, content, timestamp);
+      Comment comment = new Comment(id, content, name, timestamp);
       comments.add(comment);
     }
 
@@ -74,7 +73,6 @@ public class ListCommentsServlet extends HttpServlet {
   private int getUserChoice(HttpServletRequest request) {
     // Get the input from the form.
     String userChoiceString = request.getParameter("user-choice");
-    System.out.println("userChoiceString"+userChoiceString);
     // Convert the input to an int.
     int userChoice;
     try {

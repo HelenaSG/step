@@ -36,11 +36,13 @@ public class DataServlet extends HttpServlet {
 
     //Retrieve user's input
     String content = request.getParameter("content");
+    String name = request.getParameter("name");
     long timestamp = System.currentTimeMillis();
 
     //Save as an entity with kind "Comments" in Datastore
     Entity cmtEntity = new Entity("Comments"); 
     cmtEntity.setProperty("content", content);
+    cmtEntity.setProperty("name", name);
     cmtEntity.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();

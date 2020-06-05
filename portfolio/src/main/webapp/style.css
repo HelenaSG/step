@@ -29,6 +29,18 @@ h4 {
     color: pink; 
 }
 
+h5 {
+    font-size: 0.7vw;
+    text-align: center;
+    color: pink; 
+}
+
+h6 {
+    font-size: 1vw;
+    text-align: center;
+    color: rgba(247, 206, 213, 0.973); 
+}
+
 .mainContainer {
     margin: 11vw 6vw 1vw 7vw;
 }
@@ -280,14 +292,11 @@ padding-top:2.1vw;
   list-style-type: none;
 }
 
-.comment {
-  border: thin solid black;
-  display: flex;
-  margin: 0.5vw;
-  padding: 0.5vw;
-  width: 15vw;
-}
-
-.comment span {
-  flex-grow: 1;
+.deleteButton {
+  background-color: Transparent;
+  border: none;
+  outline:none;
+  font-size: 0.5vw;
+  color: white;  
+  cursor: pointer;
 }

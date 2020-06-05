@@ -89,14 +89,15 @@ function deleteAll() {
 
 /** Create an element that represents a comment, including its delete button. */
 function createCmtElement(comment) {
-  const commentElement = document.createElement('li');
-  commentElement.className = 'comment';
+  const commentElement = document.createElement('h6');
+  //commentElement.className = 'comment';
 
-  const contentElement = document.createElement('span');
-  contentElement.innerText = comment.content;
+  //const contentElement = document.createElement('span');
+  commentElement.innerText = comment.content + " - " + comment.name + " ";
 
   const deleteButtonElement = document.createElement('button');
-  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.innerText = '✘';
+  deleteButtonElement.className = "deleteButton";
   deleteButtonElement.addEventListener('click', () => {
     deleteCmt(comment);
 
@@ -104,7 +105,7 @@ function createCmtElement(comment) {
     commentElement.remove();
   });
 
-  commentElement.appendChild(contentElement);
+  //commentElement.appendChild(contentElement);
   commentElement.appendChild(deleteButtonElement);
   return commentElement;
 }

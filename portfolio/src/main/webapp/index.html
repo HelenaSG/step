@@ -65,7 +65,7 @@
         <!-- projects -->
         <div class="main" id="projects">
     
-            <h1> Projects </h1>
+            <h1>  💫 Projects 💫 </h1>
 
             <p>Voronoi Diagram Image Converter</p>
             <p class = "note">hover the cursor over to see a description</p>
@@ -93,29 +93,30 @@
 
         <!-- comment -->
         <div class="main" id="comments">
-            <body onload="loadComments()">
+            <body onload="loadComments()"> 
+
+                <p> 🌟 Comments 🌟 </p> 
                 
                 <!-- redirect form's action to an invisible iframe -->
                 <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 
-                <form method="POST" action="/data" target="hiddenFrame">
-                    <p>Number of comments displayed:</p>
-                    <input type="number" name="user-choice" id="num" min="1" max="50" value="3">
-                    <br/>
-                </form>
-
-                <button onclick="refreshComments()">ok</button>
-
                 <ul id="comment-list"></ul>
 
                 <form method="POST" action="/data" target="hiddenFrame">
-                    <p>Leave a comment:</p>
-                    <textarea name="content"></textarea>
+                    <textarea name="content" rows="6" cols="30" placeholder="leave a comment here"></textarea>
                     <br/>
-                    <button>submit</button>
+                    <textarea name="name" rows="1" cols="15" placeholder="name"></textarea>
+                    <br/>
+                    <input type="submit">
                 </form>
-        
+
                 <button onclick="refreshComments()">refresh</button>
+
+                <form method="POST" action="/data" target="hiddenFrame">
+                    <h5>display at most <input type="number" name="user-choice" id="num" min="1" max="50" value="3"> comments 
+                       <button type="button" onclick="refreshComments()">ok</button>
+                    </h5>sc
+                </form>
 
                 <button onclick="deleteAll()">delete all comments</button>
 
