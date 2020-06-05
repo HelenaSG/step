@@ -47,65 +47,27 @@ function addRandomFact() {
 
 /**
  * Comment system.
- */
-// function getComments() {
-//   fetch('/data').then(response => response.json()).then((array) => {
-//     // create HTML content
-//     const historyEL = document.getElementById('history');
-//     historyEL.innerHTML = createListElement(array);
-//   });
-// }
-
-// //Add <li> tag for each index of the array.
-// function createListElement(array) {
-//   var output = "";
-//   for (index = 0; index < array.length; index++) { 
-//     output = output + "<li>" + array[index] + "</li>\n";
-//   }   
-//   return output;
-// }
-
-// //new
-// function getComments() {
-//   fetch('/list-comments').then(response => response.json()).then((comments) => {
-//     const commentListElement = document.getElementById('comment-list');
-//     comments.forEach((comment) => {
-//       commentListElement.appendChild(createcommentElement(comment));
-//     })
-//   });
-// }
-
-// /** Creates an element that represents a comment, including its delete button. */
-// function createcommentElement(comment) {
-//   const commentElement = document.createElement('li');
-//   commentElement.className = 'comment';
-
-//   const contentElement = document.createElement('span');
-//   contentElement.innerText = comment.content;
-
-//   const deleteButtonElement = document.createElement('button');
-//   deleteButtonElement.innerText = 'Delete';
-//   deleteButtonElement.addEventListener('click', () => {
-//     deletecomment(comment);
-
-//     // Remove the comment from the DOM.
-//     commentElement.remove();
-//   });
-
-//   commentElement.appendChild(contentElement);
-//   commentElement.appendChild(deleteButtonElement);
-//   return commentElement;
-// }
-
-/**
- * Comment system.
  *
  * Fetch comments from the server and adds them to the DOM. 
  */
 function loadComments() {
-  fetch('/list-comments').then(response => response.json()).then((comments) => {
+  fetch("/list-comments").then(response => response.json()).then((comments) => {
     // Create HTML content.
     const commentListElement = document.getElementById('comment-list');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCmtElement(comment));
+    })
+  });
+}
+
+function refreshComments() {
+  var num = document.getElementById('num').value;
+  fetch("/list-comments?user-choice="+num).then(response => response.json()).then((comments) => {
+    // Create HTML content.
+    const commentListElement = document.getElementById('comment-list');
+    while (commentListElement.hasChildNodes()) {
+      commentListElement.removeChild(commentListElement.lastChild);
+    }
     comments.forEach((comment) => {
       commentListElement.appendChild(createCmtElement(comment));
     })
