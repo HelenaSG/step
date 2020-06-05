@@ -94,7 +94,8 @@
         <!-- comment -->
         <div class="main" id="comments">
             <body onload="loadComments()">
-
+                
+                <!-- redirect form's action to an invisible iframe -->
                 <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 
                 <form method="POST" action="/data" target="hiddenFrame">
@@ -111,10 +112,12 @@
                     <p>Leave a comment:</p>
                     <textarea name="content"></textarea>
                     <br/>
-                    <button onclick="refreshComments()">submit</button>
+                    <button>submit</button>
                 </form>
+        
+                <button onclick="refreshComments()">refresh</button>
 
-                <button onclick="refreshComments()">refresh comments</button>
+                <button onclick="deleteAll()">delete all comments</button>
 
             </body>
         </div>

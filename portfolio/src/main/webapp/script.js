@@ -47,9 +47,9 @@ function addRandomFact() {
 
 /**
  * Comment system.
- *
- * Fetch comments from the server and adds them to the DOM. 
  */
+
+/** Fetch comments from the server and adds them to the DOM.  */
 function loadComments() {
   fetch("/list-comments").then(response => response.json()).then((comments) => {
     // Create HTML content.
@@ -60,6 +60,7 @@ function loadComments() {
   });
 }
 
+/** Refresh to desplay desired amount of comments.  */
 function refreshComments() {
   var num = document.getElementById('num').value;
   fetch("/list-comments?user-choice="+num).then(response => response.json()).then((comments) => {
@@ -71,6 +72,18 @@ function refreshComments() {
     comments.forEach((comment) => {
       commentListElement.appendChild(createCmtElement(comment));
     })
+  });
+}
+
+/** Tell the server to delete all comments. */
+function deleteAll() {
+  const request = new Request('/delete-data', {method: 'POST'});
+  fetch(request).then(() => {
+    // Delet HTML content.
+    const commentListElement = document.getElementById('comment-list');
+    while (commentListElement.hasChildNodes()) {
+      commentListElement.removeChild(commentListElement.lastChild);
+    }
   });
 }
 
@@ -96,7 +109,7 @@ function createCmtElement(comment) {
   return commentElement;
 }
 
-/** Tell the server to delete the comment. */
+/** Tell the server to delete a comment. */
 function deleteCmt(comment) {
   const params = new URLSearchParams();
   params.append('id', comment.id);
