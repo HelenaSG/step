@@ -90,9 +90,6 @@ function deleteAll() {
 /** Create an element that represents a comment, including its delete button. */
 function createCmtElement(comment) {
   const commentElement = document.createElement('h6');
-  //commentElement.className = 'comment';
-
-  //const contentElement = document.createElement('span');
   commentElement.innerText = comment.content + " - " + comment.name + " ";
 
   const deleteButtonElement = document.createElement('button');

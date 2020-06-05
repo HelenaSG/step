@@ -37,6 +37,7 @@ public class DataServlet extends HttpServlet {
     //Retrieve user's input
     String content = request.getParameter("content");
     String name = request.getParameter("name");
+    if (name.replace(" ", "").length() == 0) {name="Anonymous";}
     long timestamp = System.currentTimeMillis();
 
     //Save as an entity with kind "Comments" in Datastore
