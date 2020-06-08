@@ -46,21 +46,70 @@ function addRandomFact() {
 }
 
 /**
- * Adds comments the page.
+ * Comment system.
  */
-function getComments() {
-  fetch('/data').then(response => response.json()).then((array) => {
-    // create HTML content
-    const historyEL = document.getElementById('history');
-    historyEL.innerHTML = createListElement(array);
+
+/** Fetch comments from the server and adds them to the DOM.  */
+function loadComments() {
+  fetch("/list-comments").then(response => response.json()).then((comments) => {
+    // Create HTML content.
+    const commentListElement = document.getElementById('comment-list');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCmtElement(comment));
+    })
   });
 }
 
-//Add <li> tag for each index of the array.
-function createListElement(array) {
-  var output = "";
-  for (index = 0; index < array.length; index++) { 
-    output = output + "<li>" + array[index] + "</li>\n";
-  }   
-  return output;
+/** Refresh to desplay desired amount of comments.  */
+function refreshComments() {
+  var num = document.getElementById('num').value;
+  fetch("/list-comments?user-choice="+num).then(response => response.json()).then((comments) => {
+    // Create HTML content.
+    const commentListElement = document.getElementById('comment-list');
+    while (commentListElement.hasChildNodes()) {
+      commentListElement.removeChild(commentListElement.lastChild);
+    }
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCmtElement(comment));
+    })
+  });
+}
+
+/** Tell the server to delete all comments. */
+function deleteAll() {
+  const request = new Request('/delete-data', {method: 'POST'});
+  fetch(request).then(() => {
+    // Delet HTML content.
+    const commentListElement = document.getElementById('comment-list');
+    while (commentListElement.hasChildNodes()) {
+      commentListElement.removeChild(commentListElement.lastChild);
+    }
+  });
+}
+
+/** Create an element that represents a comment, including its delete button. */
+function createCmtElement(comment) {
+  const commentElement = document.createElement('h6');
+  commentElement.innerText = comment.content + " - " + comment.name + " ";
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = '✘';
+  deleteButtonElement.className = "deleteButton";
+  deleteButtonElement.addEventListener('click', () => {
+    deleteCmt(comment);
+
+    // Remove the comment from the DOM.
+    commentElement.remove();
+  });
+
+  //commentElement.appendChild(contentElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
+}
+
+/** Tell the server to delete a comment. */
+function deleteCmt(comment) {
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-comment', {method: 'POST', body: params});
 }

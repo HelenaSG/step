@@ -14,7 +14,6 @@
     <div id="content">
 
         <!-- main page -->
-
         <div class="main" id="home">
             <div class="flexbox">
 
@@ -46,21 +45,6 @@
             </div>
         </div>
 
-        <body onload="getComments()">
-            
-             <form action="/data" method="POST">
-
-                <p>Leave a comment:</p>
-                <textarea name="text-input"></textarea>
-                <br/><br/>
-
-                <input type="submit" />
-            </form>
-
-            <ul id="history"></ul>
-        
-        </body>
-        
         <!-- about me -->
         <div class="main" id="about">
 
@@ -81,7 +65,7 @@
         <!-- projects -->
         <div class="main" id="projects">
     
-            <h1> Projects </h1>
+            <h1>  💫 Projects 💫 </h1>
 
             <p>Voronoi Diagram Image Converter</p>
             <p class = "note">hover the cursor over to see a description</p>
@@ -107,6 +91,38 @@
 
         </div>
 
+        <!-- comment -->
+        <div class="main" id="comments">
+            <body onload="loadComments()"> 
+
+                <p> 🌟 Comments 🌟 </p> 
+                
+                <!-- redirect form's action to an invisible iframe -->
+                <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
+
+                <ul id="comment-list"></ul>
+
+                <form method="POST" action="/data" target="hiddenFrame">
+                    <textarea name="content" rows="6" cols="30" placeholder="leave a comment here"></textarea>
+                    <br/>
+                    <textarea name="name" rows="1" cols="15" placeholder="name"></textarea>
+                    <br/>
+                    <input type="submit">
+                </form>
+
+                <button onclick="refreshComments()">refresh</button>
+
+                <form method="POST" action="/data" target="hiddenFrame">
+                    <h5>display at most <input type="number" name="user-choice" id="num" min="1" max="50" value="3"> comments 
+                       <button type="button" onclick="refreshComments()">ok</button>
+                    </h5>
+                </form>
+
+                <button onclick="deleteAll()">delete all comments</button>
+
+            </body>
+        </div>
+     
         <!-- navigation bar -->
         <div class="navbar">
             <a href="#home">Home</a> 
@@ -115,7 +131,6 @@
             <a href="resume.pdf">Resume</a>
             <a href="https://github.com/HelenaSG"></a>
         </div>
-     
     </div>
   </body>
 </html>

@@ -29,6 +29,18 @@ h4 {
     color: pink; 
 }
 
+h5 {
+    font-size: 0.7vw;
+    text-align: center;
+    color: pink; 
+}
+
+h6 {
+    font-size: 1vw;
+    text-align: center;
+    color: rgba(247, 206, 213, 0.973); 
+}
+
 .mainContainer {
     margin: 11vw 6vw 1vw 7vw;
 }
@@ -93,8 +105,15 @@ html {
   margin-top: 2vw;
   padding-top: 5vw;
   padding-bottom: 5vw;
-  margin-bottom: 5vw;
+  /* margin-bottom: 5vw; */
   background-color: #606060;
+}
+
+#comments {
+  margin-top: 2vw;
+  padding-top: 5vw;
+  padding-bottom: 5vw;
+  margin-bottom: 5vw;
 }
 
 
@@ -268,10 +287,16 @@ padding-top:2.1vw;
   text-align: center;
 }
 
-#hello-container {
-  margin-top: 1vw;
+/* comment */
+#comment-list {
+  list-style-type: none;
 }
 
-#server-stats-container {
-  margin-top: 1vw;
+.deleteButton {
+  background-color: Transparent;
+  border: none;
+  outline:none;
+  font-size: 0.5vw;
+  color: white;  
+  cursor: pointer;
 }

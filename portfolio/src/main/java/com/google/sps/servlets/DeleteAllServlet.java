@@ -17,6 +17,8 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
+import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,27 +29,22 @@ import java.util.Arrays;
 import com.google.gson.Gson;
 
 
-/** Servlet that handles comments data submitted by users */
-@WebServlet("/data")
-public class DataServlet extends HttpServlet {
+/** Servlet that deletes all comments data submitted by users */
+@WebServlet("/delete-data")
+public class DeleteAllServlet extends HttpServlet {
 
     @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-    //Retrieve user's input
-    String content = request.getParameter("content");
-    String name = request.getParameter("name");
-    if (name.replace(" ", "").length() == 0) {name="Anonymous";}
-    long timestamp = System.currentTimeMillis();
-
-    //Save as an entity with kind "Comments" in Datastore
-    Entity cmtEntity = new Entity("Comments"); 
-    cmtEntity.setProperty("content", content);
-    cmtEntity.setProperty("name", name);
-    cmtEntity.setProperty("timestamp", timestamp);
+    
+    Query query = new Query("Comments");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
-    datastore.put(cmtEntity);
+    PreparedQuery results = datastore.prepare(query);
+    
+    //
+    for (Entity entity : results.asIterable()){
+        datastore.delete(entity.getKey());
+    }
   }
 }
  
