@@ -113,3 +113,30 @@ function deleteCmt(comment) {
   params.append('id', comment.id);
   fetch('/delete-comment', {method: 'POST', body: params});
 }
+
+// var hide = 0;
+// if (hide == 0) {
+//     document.getElementById("comment-section").style.display = "none";
+// }
+// else{
+//     document.getElementById("comment-section").style.display = "block";
+// }
+
+function login() {
+  fetch('/login').then(response => response.json()).then((array) => {
+    // show comments section if logged in
+    var status = array[2];
+    console.log(status);
+    if (status == "1" ){
+        //hide = 1;
+        document.getElementById("comment-section").style.display = "block";
+    }
+    else if (status == "0" ){
+        //hide = 0;
+        document.getElementById("comment-section").style.display = "none";
+    }
+    // create HTML content)
+    const statsListElement = document.getElementById('login-status-container');
+    statsListElement.innerHTML = array[0]+" "+array[1];
+  });
+}
