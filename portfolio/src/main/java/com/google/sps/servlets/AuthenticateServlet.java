@@ -14,6 +14,7 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
 import java.io.IOException;
@@ -32,31 +33,30 @@ public class AuthenticateServlet extends HttpServlet {
 
     int status = 0;
     Gson gson = new Gson();
+    String redirectTo = "/index.html#comments";
+    response.setContentType("application/json");
+    UserService userService = UserServiceFactory.getUserService();
+    
     ArrayList<String> toReturn = new ArrayList<String>();
 
-    String redirectTo = "/index.html";
-    response.setContentType("application/json");
-
-    UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
-      String userEmail = userService.getCurrentUser().getEmail();
-      String logoutUrl = userService.createLogoutURL(redirectTo);
-
       status = 1;
-      toReturn.add("<p>Hello " + userEmail + "!</p>");
-      toReturn.add("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
+      String userEmail = userService.getCurrentUser().getEmail();
+      String username = userEmail.substring(0, userEmail.indexOf("@"));
+      String logoutUrl = userService.createLogoutURL(redirectTo);
+      toReturn.add("<h7>Hello " + username + "!</h7>");
+      toReturn.add("<h7>Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>");
       
     } else {
-      String loginUrl = userService.createLoginURL(redirectTo);
-      
       status = 0;
-      toReturn.add("<p>Hello stranger.</p>");
-      toReturn.add("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+      String loginUrl = userService.createLoginURL(redirectTo);
+      toReturn.add("<h7>Hello stranger.</h7>");
+      toReturn.add("<h7>Login <a href=\"" + loginUrl + "\">here</a>.</h7>");
     }
     
     toReturn.add(Integer.toString(status));
     String json = gson.toJson(toReturn);
     response.getWriter().println(json);
-
   }
+
 }
