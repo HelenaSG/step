@@ -39,9 +39,9 @@ public class ListCommentsServlet extends HttpServlet {
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
     int max = 3;
-    int userChoice = getUserChoice(request);
-    if (userChoice != -1) {
-        max = userChoice;
+    int maxCount = getmaxCount(request);
+    if (maxCount != -1) {
+        max = maxCount;
     }
 
     Query query = new Query("Comments").addSort("timestamp", SortDirection.DESCENDING);
@@ -70,25 +70,25 @@ public class ListCommentsServlet extends HttpServlet {
   }
 
   /** Returns the choice entered by the user, or -1 if the choice was invalid. */
-  private int getUserChoice(HttpServletRequest request) {
+  private int getmaxCount(HttpServletRequest request) {
     // Get the input from the form.
-    String userChoiceString = request.getParameter("user-choice");
+    String maxCountString = request.getParameter("user-choice");
     // Convert the input to an int.
-    int userChoice;
+    int maxCount;
     try {
-      userChoice = Integer.parseInt(userChoiceString);
+      maxCount = Integer.parseInt(maxCountString);
     } catch (NumberFormatException e) {
-      System.err.println("Could not convert to int: " + userChoiceString);
+      System.err.println("Could not convert to int: " + maxCountString);
       return -1;
     }
 
     // Check that the input is between 1 and 50.
-    if (userChoice < 1 || userChoice > 50) {
-      System.err.println("user choice is out of range: " + userChoiceString);
+    if (maxCount < 1 || maxCount > 50) {
+      System.err.println("user choice is out of range: " + maxCountString);
       return -1;
     }
 
-    return userChoice;
+    return maxCount;
   }
   
 }

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <title>Helena's Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
+    
   </head>
   <body>
     <div id="content">
@@ -96,29 +96,36 @@
             <body onload="loadComments()"> 
 
                 <p> 🌟 Comments 🌟 </p> 
-                
-                <!-- redirect form's action to an invisible iframe -->
-                <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 
-                <ul id="comment-list"></ul>
+                <button onclick="login()">view comments</button>
+                <ul id="login-status-container"></ul>
 
-                <form method="POST" action="/data" target="hiddenFrame">
-                    <textarea name="content" rows="6" cols="30" placeholder="leave a comment here"></textarea>
-                    <br/>
-                    <textarea name="name" rows="1" cols="15" placeholder="name"></textarea>
-                    <br/>
-                    <input type="submit">
-                </form>
+                <div id="comment-section" style="display: none;">
+                    
+                    <!-- redirect form's action to an invisible iframe -->
+                    <iframe name="hiddenFrame" width="0" height="0" border="0" style="display: none;"></iframe>
 
-                <button onclick="refreshComments()">refresh</button>
+                    <ul id="comment-list"></ul>
 
-                <form method="POST" action="/data" target="hiddenFrame">
-                    <h5>display at most <input type="number" name="user-choice" id="num" min="1" max="50" value="3"> comments 
-                       <button type="button" onclick="refreshComments()">ok</button>
-                    </h5>
-                </form>
+                    <form method="POST" action="/data" target="hiddenFrame">
+                        <textarea name="content" rows="6" cols="30" placeholder="leave a comment here"></textarea>
+                        <br/>
+                        <textarea name="name" rows="1" cols="15" placeholder="name"></textarea>
+                        <br/>
+                        <input type="submit">
+                    </form>
 
-                <button onclick="deleteAll()">delete all comments</button>
+                    <button onclick="refreshComments()">refresh</button>
+
+                    <form method="POST" action="/data" target="hiddenFrame">
+                        <h5>display at most <input type="number" name="user-choice" id="num" min="1" max="50" value="3"> comments 
+                        <button type="button" onclick="refreshComments()">ok</button>
+                        </h5>
+                    </form>
+
+                    <button onclick="deleteAll()">delete all comments</button>
+
+                </div>
 
             </body>
         </div>
@@ -132,5 +139,6 @@
             <a href="https://github.com/HelenaSG"></a>
         </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
