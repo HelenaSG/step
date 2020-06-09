@@ -14,8 +14,6 @@
 
 package com.google.sps.servlets;
 
-import com.google.appengine.api.users.UserService;
-import com.google.appengine.api.users.UserServiceFactory;
 import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
@@ -28,6 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import com.google.gson.Gson;
 
+
 /** Servlet that handles comments data submitted by users */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
@@ -38,12 +37,7 @@ public class DataServlet extends HttpServlet {
     //Retrieve user's input
     String content = request.getParameter("content");
     String name = request.getParameter("name");
-    if (name.replace(" ", "").length() == 0) {
-        UserService userService = UserServiceFactory.getUserService();
-        String userEmail = userService.getCurrentUser().getEmail();
-        String username = userEmail.substring(0, userEmail.indexOf("@"));
-        name = username;
-        }
+    if (name.replace(" ", "").length() == 0) {name="Anonymous";}
     long timestamp = System.currentTimeMillis();
 
     //Save as an entity with kind "Comments" in Datastore
