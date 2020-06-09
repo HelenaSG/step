@@ -41,6 +41,24 @@ h6 {
     color: rgba(247, 206, 213, 0.973); 
 }
 
+h7 {
+    font-size: 0.7vw;
+    text-align: center;
+    color: rgba(211, 211, 211, 0.877);
+}
+
+a {
+  color: hotpink;
+}
+
+button{
+    cursor: pointer;
+}
+
+.inputButton{
+    cursor: pointer;
+}
+
 .mainContainer {
     margin: 11vw 6vw 1vw 7vw;
 }
