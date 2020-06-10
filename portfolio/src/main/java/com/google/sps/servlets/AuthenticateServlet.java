@@ -41,19 +41,17 @@ public class AuthenticateServlet extends HttpServlet {
     ArrayList<String> toReturn = new ArrayList<String>();
 
     if (userService.isUserLoggedIn()) {
-      isUserLoggedIn = true;
       String userEmail = userService.getCurrentUser().getEmail();
       String username = userEmail.substring(0, userEmail.indexOf("@"));
       String logoutUrl = userService.createLogoutURL(redirectTo);
       String content = "<h7>Hello " + username + "! Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>"; 
-      AuthResponse AuthResponse = new AuthResponse(content, isUserLoggedIn);
+      AuthResponse AuthResponse = new AuthResponse(content);
       String json = gson.toJson(AuthResponse);
       response.getWriter().println(json);     
     } else {
-      isUserLoggedIn = false;
       String loginUrl = userService.createLoginURL(redirectTo);
       String content = "<h7>Hello stranger. Login <a href=\"" + loginUrl + "\">here</a>.</h7>";
-      AuthResponse AuthResponse = new AuthResponse(content, isUserLoggedIn);
+      AuthResponse AuthResponse = new AuthResponse(content);
       String json = gson.toJson(AuthResponse);
       response.getWriter().println(json);
     }

@@ -14,14 +14,18 @@
 
 package com.google.sps.data;
 
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
+
 /** Authentication response class. */
 public final class AuthResponse {
 
   private final String htmlContent;
   private final Boolean isUserLoggedIn;
 
-  public AuthResponse(String htmlContent, Boolean isUserLoggedIn) {
+  public AuthResponse(String htmlContent) {
+    UserService userService = UserServiceFactory.getUserService();
     this.htmlContent = htmlContent;
-    this.isUserLoggedIn = isUserLoggedIn;
+    this.isUserLoggedIn = userService.isUserLoggedIn();
   }
 }
