@@ -38,7 +38,7 @@ public class DataServlet extends HttpServlet {
     //Retrieve user's input
     String content = request.getParameter("content");
     String name = request.getParameter("name");
-    if (name.replace(" ", "").length() == 0) {
+    if (name.trim().isEmpty()) {
         UserService userService = UserServiceFactory.getUserService();
         String userEmail = userService.getCurrentUser().getEmail();
         String username = userEmail.substring(0, userEmail.indexOf("@"));

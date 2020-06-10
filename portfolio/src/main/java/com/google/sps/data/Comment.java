@@ -14,7 +14,7 @@
 
 package com.google.sps.data;
 
-/** An item on a todo list. */
+/** An item on the comment list. */
 public final class Comment {
 
   private final long id;

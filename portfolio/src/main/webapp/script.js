@@ -115,9 +115,9 @@ function deleteCmt(comment) {
 }
 
 function login() {
-  fetch('/login').then(response => response.json()).then((array) => {
+  fetch('/login').then(response => response.json()).then((authResponse) => {
     // show comments section if logged in
-    var status = array[2];
+    var status = authResponse.status;
     if (status == "1" ){
         document.getElementById("comment-section").style.display = "block";
     }
@@ -126,6 +126,6 @@ function login() {
     }
     // create HTML content)
     const statsListElement = document.getElementById('login-status-container');
-    statsListElement.innerHTML = array[0]+" "+array[1];
+    statsListElement.innerHTML = authResponse.htmlContent;
   });
 }

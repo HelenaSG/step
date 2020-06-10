@@ -17,6 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.sps.data.AuthResponse;//import AuthResponse class
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -44,19 +45,18 @@ public class AuthenticateServlet extends HttpServlet {
       String userEmail = userService.getCurrentUser().getEmail();
       String username = userEmail.substring(0, userEmail.indexOf("@"));
       String logoutUrl = userService.createLogoutURL(redirectTo);
-      toReturn.add("<h7>Hello " + username + "!</h7>");
-      toReturn.add("<h7>Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>");
-      
+      String content = "<h7>Hello " + username + "! Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>"; 
+      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(status));
+      String json = gson.toJson(AuthResponse);
+      response.getWriter().println(json);     
     } else {
       status = 0;
       String loginUrl = userService.createLoginURL(redirectTo);
-      toReturn.add("<h7>Hello stranger.</h7>");
-      toReturn.add("<h7>Login <a href=\"" + loginUrl + "\">here</a>.</h7>");
+      String content = "<h7>Hello stranger. Login <a href=\"" + loginUrl + "\">here</a>.</h7>";
+      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(status));
+      String json = gson.toJson(AuthResponse);
+      response.getWriter().println(json);
     }
-    
-    toReturn.add(Integer.toString(status));
-    String json = gson.toJson(toReturn);
-    response.getWriter().println(json);
   }
 
 }
