@@ -117,11 +117,11 @@ function deleteCmt(comment) {
 function login() {
   fetch('/login').then(response => response.json()).then((authResponse) => {
     // show comments section if logged in
-    var status = authResponse.status;
-    if (status == "1" ){
+    var isLoggedIn = authResponse.isUserLoggedIn;
+    if (isLoggedIn){
         document.getElementById("comment-section").style.display = "block";
     }
-    else if (status == "0" ){
+    else{
         document.getElementById("comment-section").style.display = "none";
     }
     // create HTML content)

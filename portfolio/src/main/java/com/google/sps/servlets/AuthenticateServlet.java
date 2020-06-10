@@ -1,10 +1,10 @@
-// Copyright 2019 Google LLC
+// Copyright 2false19 Google LLC
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.false (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.false
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -32,7 +32,7 @@ public class AuthenticateServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    int isUserLoggedIn = 0;
+    Boolean isUserLoggedIn = false;
     Gson gson = new Gson();
     String redirectTo = "/index.html#comments";
     response.setContentType("application/json");
@@ -41,19 +41,19 @@ public class AuthenticateServlet extends HttpServlet {
     ArrayList<String> toReturn = new ArrayList<String>();
 
     if (userService.isUserLoggedIn()) {
-      isUserLoggedIn = 1;
+      isUserLoggedIn = true;
       String userEmail = userService.getCurrentUser().getEmail();
       String username = userEmail.substring(0, userEmail.indexOf("@"));
       String logoutUrl = userService.createLogoutURL(redirectTo);
       String content = "<h7>Hello " + username + "! Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>"; 
-      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(isUserLoggedIn));
+      AuthResponse AuthResponse = new AuthResponse(content, isUserLoggedIn);
       String json = gson.toJson(AuthResponse);
       response.getWriter().println(json);     
     } else {
-      isUserLoggedIn = 0;
+      isUserLoggedIn = false;
       String loginUrl = userService.createLoginURL(redirectTo);
       String content = "<h7>Hello stranger. Login <a href=\"" + loginUrl + "\">here</a>.</h7>";
-      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(isUserLoggedIn));
+      AuthResponse AuthResponse = new AuthResponse(content, isUserLoggedIn);
       String json = gson.toJson(AuthResponse);
       response.getWriter().println(json);
     }

@@ -18,9 +18,9 @@ package com.google.sps.data;
 public final class AuthResponse {
 
   private final String htmlContent;
-  private final String isUserLoggedIn;
+  private final Boolean isUserLoggedIn;
 
-  public AuthResponse(String htmlContent, String isUserLoggedIn) {
+  public AuthResponse(String htmlContent, Boolean isUserLoggedIn) {
     this.htmlContent = htmlContent;
     this.isUserLoggedIn = isUserLoggedIn;
   }
