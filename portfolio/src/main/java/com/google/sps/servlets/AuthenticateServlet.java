@@ -32,7 +32,6 @@ public class AuthenticateServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    Boolean isUserLoggedIn = false;
     Gson gson = new Gson();
     String redirectTo = "/index.html#comments";
     response.setContentType("application/json");
