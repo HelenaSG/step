@@ -17,7 +17,7 @@ package com.google.sps.servlets;
 import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
-import com.google.sps.data.AuthResponse;//import AuthResponse class
+import com.google.sps.data.AuthResponse;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,7 +32,7 @@ public class AuthenticateServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    int status = 0;
+    int isUserLoggedIn = 0;
     Gson gson = new Gson();
     String redirectTo = "/index.html#comments";
     response.setContentType("application/json");
@@ -41,19 +41,19 @@ public class AuthenticateServlet extends HttpServlet {
     ArrayList<String> toReturn = new ArrayList<String>();
 
     if (userService.isUserLoggedIn()) {
-      status = 1;
+      isUserLoggedIn = 1;
       String userEmail = userService.getCurrentUser().getEmail();
       String username = userEmail.substring(0, userEmail.indexOf("@"));
       String logoutUrl = userService.createLogoutURL(redirectTo);
       String content = "<h7>Hello " + username + "! Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>"; 
-      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(status));
+      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(isUserLoggedIn));
       String json = gson.toJson(AuthResponse);
       response.getWriter().println(json);     
     } else {
-      status = 0;
+      isUserLoggedIn = 0;
       String loginUrl = userService.createLoginURL(redirectTo);
       String content = "<h7>Hello stranger. Login <a href=\"" + loginUrl + "\">here</a>.</h7>";
-      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(status));
+      AuthResponse AuthResponse = new AuthResponse(content, Integer.toString(isUserLoggedIn));
       String json = gson.toJson(AuthResponse);
       response.getWriter().println(json);
     }

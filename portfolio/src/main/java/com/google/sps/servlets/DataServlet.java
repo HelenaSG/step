@@ -43,7 +43,7 @@ public class DataServlet extends HttpServlet {
         String userEmail = userService.getCurrentUser().getEmail();
         String username = userEmail.substring(0, userEmail.indexOf("@"));
         name = username;
-        }
+    }
     long timestamp = System.currentTimeMillis();
 
     //Save as an entity with kind "Comments" in Datastore

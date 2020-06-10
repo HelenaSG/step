@@ -18,10 +18,10 @@ package com.google.sps.data;
 public final class AuthResponse {
 
   private final String htmlContent;
-  private final String status;
+  private final String isUserLoggedIn;
 
-  public AuthResponse(String htmlContent, String status) {
+  public AuthResponse(String htmlContent, String isUserLoggedIn) {
     this.htmlContent = htmlContent;
-    this.status = status;
+    this.isUserLoggedIn = isUserLoggedIn;
   }
 }
