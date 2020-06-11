@@ -133,7 +133,7 @@ function login() {
   });
 }
 
-/** Creates a chart and adds it to the page. */
+/** Create a chart and adds it to the page. */
 function drawChart() {
   const data = new google.visualization.DataTable();
   data.addColumn('string', 'Hours per Day');

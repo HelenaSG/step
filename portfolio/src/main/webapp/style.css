@@ -318,3 +318,19 @@ padding-top:2.1vw;
   color: white;  
   cursor: pointer;
 }
+
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map-container {
+    height: 800px;
+    width: 60%;
+    margin: auto;
+    padding: 50px;
+}
+
+.centerChart {
+    display: block;
+    margin: auto;
+    align-content: center;
+    padding: 10px 500px;
+}
