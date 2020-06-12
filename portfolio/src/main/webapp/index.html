@@ -9,6 +9,7 @@
     <title>Helena's Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="map.js"></script>
+    <script src="chart.js"></script>
     <script src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0MZY0jj9dSNvO6KnIlGkHPxPwqkKH6_0&callback=initMap"
@@ -57,7 +58,6 @@
             <img src="images/lena-2.JPG" class="center profile">
 
             <p>I am a rising junior at Smith College studying Computer Science and Mathematics.</p>
-            <div id="chart-container" class="centerChart"></div>
 
             <p class = "note">click here to get a random fact of me:</p>
             <button class = "button" onclick="addRandomFact()"> 🎠 </button>
@@ -65,6 +65,11 @@
 
             <img src="images/lena-1.JPG" class="responsive center round">
             <img src="images/lena-3.JPG" class="responsive center round">
+
+            <div id="chart-container" class="centerChart"></div>
+
+            <p>Places I've been to:</p>
+            <div id="map-container"></div>
       
         </div>
 
@@ -142,7 +147,6 @@
         </div>
     
     </div>
-    <div id="map-container"></div>
     <script src="script.js"></script>
   </body>
 </html>
