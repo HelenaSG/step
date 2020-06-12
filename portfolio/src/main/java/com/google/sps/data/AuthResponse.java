@@ -14,18 +14,18 @@
 
 package com.google.sps.data;
 
-/** An item on the comment list. */
-public final class Comment {
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
-  private final long id;
-  private final String content;
-  private final String name;
-  private final long timestamp;
+/** Authentication response class. */
+public final class AuthResponse {
 
-  public Comment(long id, String content, String name, long timestamp) {
-    this.id = id;
-    this.content = content;
-    this.name = name;
-    this.timestamp = timestamp;
+  private final String htmlContent;
+  private final Boolean isUserLoggedIn;
+
+  public AuthResponse(String htmlContent) {
+    UserService userService = UserServiceFactory.getUserService();
+    this.htmlContent = htmlContent;
+    this.isUserLoggedIn = userService.isUserLoggedIn();
   }
 }

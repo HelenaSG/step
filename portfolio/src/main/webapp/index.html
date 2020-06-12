@@ -8,9 +8,14 @@
     <meta charset="UTF-8">
     <title>Helena's Portfolio</title>
     <link rel="stylesheet" href="style.css">
-    
+    <script src="map.js"></script>
+    <script src="chart.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://unpkg.com/@google/markerclustererplus@4.0.1/dist/markerclustererplus.min.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0MZY0jj9dSNvO6KnIlGkHPxPwqkKH6_0&callback=initMap"
+  type="text/javascript"></script>
   </head>
-  <body>
+  <body onload="loadComments()">
     <div id="content">
 
         <!-- main page -->
@@ -53,12 +58,18 @@
             <img src="images/lena-2.JPG" class="center profile">
 
             <p>I am a rising junior at Smith College studying Computer Science and Mathematics.</p>
+
             <p class = "note">click here to get a random fact of me:</p>
             <button class = "button" onclick="addRandomFact()"> 🎠 </button>
             <div id="fact-container"></div>
 
             <img src="images/lena-1.JPG" class="responsive center round">
             <img src="images/lena-3.JPG" class="responsive center round">
+
+            <div id="chart-container" class="centerChart"></div>
+
+            <p>Places I've been to:</p>
+            <div id="map-container"></div>
       
         </div>
 
@@ -93,8 +104,6 @@
 
         <!-- comment -->
         <div class="main" id="comments">
-            <body onload="loadComments()"> 
-
                 <p> 🌟 Comments 🌟 </p> 
 
                 <button onclick="login()">view comments</button>
@@ -110,9 +119,9 @@
                     <form method="POST" action="/data" target="hiddenFrame">
                         <textarea name="content" rows="6" cols="30" placeholder="leave a comment here"></textarea>
                         <br/>
-                        <textarea name="name" rows="1" cols="15" placeholder="name"></textarea>
+                        <textarea name="name" rows="1" cols="15" placeholder="nickname"></textarea>
                         <br/>
-                        <input type="submit">
+                        <input type="submit" class="inputButton">
                     </form>
 
                     <button onclick="refreshComments()">refresh</button>
@@ -126,10 +135,8 @@
                     <button onclick="deleteAll()">delete all comments</button>
 
                 </div>
-
-            </body>
         </div>
-     
+
         <!-- navigation bar -->
         <div class="navbar">
             <a href="#home">Home</a> 
@@ -138,6 +145,7 @@
             <a href="resume.pdf">Resume</a>
             <a href="https://github.com/HelenaSG"></a>
         </div>
+    
     </div>
     <script src="script.js"></script>
   </body>

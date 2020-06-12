@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawChart);
+
 /**
  * Adds a random fact to the page.
  */
@@ -114,29 +117,18 @@ function deleteCmt(comment) {
   fetch('/delete-comment', {method: 'POST', body: params});
 }
 
-// var hide = 0;
-// if (hide == 0) {
-//     document.getElementById("comment-section").style.display = "none";
-// }
-// else{
-//     document.getElementById("comment-section").style.display = "block";
-// }
-
 function login() {
-  fetch('/login').then(response => response.json()).then((array) => {
+  fetch('/login').then(response => response.json()).then((authResponse) => {
     // show comments section if logged in
-    var status = array[2];
-    console.log(status);
-    if (status == "1" ){
-        //hide = 1;
+    var isLoggedIn = authResponse.isUserLoggedIn;
+    if (isLoggedIn){
         document.getElementById("comment-section").style.display = "block";
     }
-    else if (status == "0" ){
-        //hide = 0;
+    else{
         document.getElementById("comment-section").style.display = "none";
     }
     // create HTML content)
     const statsListElement = document.getElementById('login-status-container');
-    statsListElement.innerHTML = array[0]+" "+array[1];
+    statsListElement.innerHTML = authResponse.htmlContent;
   });
 }

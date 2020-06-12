@@ -1,10 +1,10 @@
-// Copyright 2019 Google LLC
+// Copyright 2false19 Google LLC
 //
-// Licensed under the Apache License, Version 2.0 (the "License");
+// Licensed under the Apache License, Version 2.false (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     https://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.false
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,8 +14,10 @@
 
 package com.google.sps.servlets;
 
+import com.google.appengine.api.datastore.*;
 import com.google.appengine.api.users.UserService;
 import com.google.appengine.api.users.UserServiceFactory;
+import com.google.sps.data.AuthResponse;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,33 +32,28 @@ public class AuthenticateServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-    int status = 0;
     Gson gson = new Gson();
+    String redirectTo = "/index.html#comments";
+    response.setContentType("application/json");
+    UserService userService = UserServiceFactory.getUserService();
+    
     ArrayList<String> toReturn = new ArrayList<String>();
 
-    String redirectTo = "/index.html";
-    response.setContentType("application/json");
-
-    UserService userService = UserServiceFactory.getUserService();
     if (userService.isUserLoggedIn()) {
       String userEmail = userService.getCurrentUser().getEmail();
+      String username = userEmail.substring(0, userEmail.indexOf("@"));
       String logoutUrl = userService.createLogoutURL(redirectTo);
-
-      status = 1;
-      toReturn.add("<p>Hello " + userEmail + "!</p>");
-      toReturn.add("<p>Logout <a href=\"" + logoutUrl + "\">here</a>.</p>");
-      
+      String content = "<h7>Hello " + username + "! Logout <a href=\"" + logoutUrl + "\">here</a>.</h7>"; 
+      AuthResponse AuthResponse = new AuthResponse(content);
+      String json = gson.toJson(AuthResponse);
+      response.getWriter().println(json);     
     } else {
       String loginUrl = userService.createLoginURL(redirectTo);
-      
-      status = 0;
-      toReturn.add("<p>Hello stranger.</p>");
-      toReturn.add("<p>Login <a href=\"" + loginUrl + "\">here</a>.</p>");
+      String content = "<h7>Hello stranger. Login <a href=\"" + loginUrl + "\">here</a>.</h7>";
+      AuthResponse AuthResponse = new AuthResponse(content);
+      String json = gson.toJson(AuthResponse);
+      response.getWriter().println(json);
     }
-    
-    toReturn.add(Integer.toString(status));
-    String json = gson.toJson(toReturn);
-    response.getWriter().println(json);
-
   }
+
 }
