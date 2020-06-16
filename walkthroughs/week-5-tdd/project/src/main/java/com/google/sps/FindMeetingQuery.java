@@ -32,21 +32,32 @@ public final class FindMeetingQuery {
         return meetingOptions;
     }
 
-    Collection<String> attendees = request.getAttendees();
-    if (attendees.isEmpty()||events.isEmpty()) {
+    //anytime works if no events or no attendees in the request
+    Collection<String> requestAttendees = request.getAttendees();
+    if (requestAttendees.isEmpty() || events.isEmpty()){
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
+
     ArrayList<Integer> startTime = new ArrayList<>();
     ArrayList<Integer> endTime = new ArrayList<>();
-
+    Collection<String> eventAttendees = new ArrayList<>();
     for (Event event : events){
         TimeRange timeRange = event.getWhen();
         int start = timeRange.start();
         int end = timeRange.end();
         startTime.add(start);
         endTime.add(end);
+        eventAttendees.addAll(event.getAttendees());
     }
     
+    //anytime works if event attendees and request attendees are non-overlapping
+    Set<String> attendeesCheckSet = new HashSet<String>();
+    attendeesCheckSet.addAll(requestAttendees);
+    attendeesCheckSet.addAll(eventAttendees);
+    if (attendeesCheckSet.size() == requestAttendees.size()+eventAttendees.size()) {
+        return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+
     ArrayList<Integer> allTime = new ArrayList<>();
     allTime.addAll(startTime);
     allTime.addAll(endTime);
