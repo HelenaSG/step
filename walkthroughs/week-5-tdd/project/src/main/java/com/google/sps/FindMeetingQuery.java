@@ -38,15 +38,15 @@ public final class FindMeetingQuery {
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 
-    ArrayList<Integer> startTime = new ArrayList<>();
-    ArrayList<Integer> endTime = new ArrayList<>();
+    ArrayList<Integer> startTimes = new ArrayList<>();
+    ArrayList<Integer> endTimes = new ArrayList<>();
     Collection<String> eventAttendees = new ArrayList<>();
     for (Event event : events){
         TimeRange timeRange = event.getWhen();
         int start = timeRange.start();
         int end = timeRange.end();
-        startTime.add(start);
-        endTime.add(end);
+        startTimes.add(start);
+        endTimes.add(end);
         eventAttendees.addAll(event.getAttendees());
     }
     
@@ -58,34 +58,45 @@ public final class FindMeetingQuery {
         return Arrays.asList(TimeRange.WHOLE_DAY);
     }
 
-    ArrayList<Integer> allTime = new ArrayList<>();
-    allTime.addAll(startTime);
-    allTime.addAll(endTime);
-    Collections.sort(allTime);
+    ArrayList<Integer> allTimes = new ArrayList<>();
+    allTimes.addAll(startTimes);
+    allTimes.addAll(endTimes);
+    Collections.sort(allTimes);
     
     //merge all overlapping events
     ArrayList<Integer> newTimeline = new ArrayList<>();
-    Stack<Integer> startTimeToMatch = new Stack<>();
-    for (int time : allTime){
-        if (startTime.contains(time)){
-            startTimeToMatch.push(time);
+    Stack<Integer> startTimesToMatch = new Stack<>();
+    long requestDuration = request.getDuration();
+    int lastEndTime = 0;
+    for (int time : allTimes){
+        if (startTimes.contains(time)){
+            startTimesToMatch.push(time);
         }
         else{
-            int currentStartTime = startTimeToMatch.peek();
-            startTimeToMatch.pop();
+            int currentStartTime = startTimesToMatch.peek();
+            startTimesToMatch.pop();
             //if reach the bottom - matched pair
-            if (startTimeToMatch.isEmpty()){
-                newTimeline.add(currentStartTime);
-                newTimeline.add(time);
+            if (startTimesToMatch.isEmpty()){
+                //only add options long enough to satisfy the request
+                long duration = currentStartTime - lastEndTime;
+                if (duration >= requestDuration ||
+                    duration < requestDuration && newTimeline.isEmpty()){
+                    newTimeline.add(currentStartTime);
+                    newTimeline.add(time);
+                }
+                else{
+                    newTimeline.set(newTimeline.size()-1, time);
+                }
+                lastEndTime = time;
             }
         }
     }
-    
+
     if (newTimeline.get(0) > TimeRange.START_OF_DAY){
         meetingOptions.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, newTimeline.get(0), false));
     }
 
-    for (int i = 1; i < newTimeline.size()-2; i += 2) {
+    for (int i = 1; i < newTimeline.size()-2; i+=2) {
         meetingOptions.add(TimeRange.fromStartEnd(newTimeline.get(i), newTimeline.get(i+1), false));
     }
     
