@@ -15,9 +15,85 @@
 package com.google.sps;
 
 import java.util.Collection;
+import java.util.Set;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Stack;
+import java.util.Collections;
 
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
-    throw new UnsupportedOperationException("TODO: Implement this method.");
+
+    ArrayList<TimeRange> meetingOptions = new ArrayList<>();
+
+    //no options for too long of a request
+    if (request.getDuration() > TimeRange.WHOLE_DAY.duration()){
+        return meetingOptions;
+    }
+
+    //anytime works if no events or no attendees in the request
+    Collection<String> requestAttendees = request.getAttendees();
+    if (requestAttendees.isEmpty() || events.isEmpty()){
+        return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+
+    ArrayList<Integer> startTime = new ArrayList<>();
+    ArrayList<Integer> endTime = new ArrayList<>();
+    Collection<String> eventAttendees = new ArrayList<>();
+    for (Event event : events){
+        TimeRange timeRange = event.getWhen();
+        int start = timeRange.start();
+        int end = timeRange.end();
+        startTime.add(start);
+        endTime.add(end);
+        eventAttendees.addAll(event.getAttendees());
+    }
+    
+    //anytime works if event attendees and request attendees are non-overlapping
+    Set<String> attendeesCheckSet = new HashSet<String>();
+    attendeesCheckSet.addAll(requestAttendees);
+    attendeesCheckSet.addAll(eventAttendees);
+    if (attendeesCheckSet.size() == requestAttendees.size()+eventAttendees.size()) {
+        return Arrays.asList(TimeRange.WHOLE_DAY);
+    }
+
+    ArrayList<Integer> allTime = new ArrayList<>();
+    allTime.addAll(startTime);
+    allTime.addAll(endTime);
+    Collections.sort(allTime);
+    
+    //merge all overlapping events
+    ArrayList<Integer> newTimeline = new ArrayList<>();
+    Stack<Integer> startTimeToMatch = new Stack<>();
+    for (int time : allTime){
+        if (startTime.contains(time)){
+            startTimeToMatch.push(time);
+        }
+        else{
+            int currentStartTime = startTimeToMatch.peek();
+            startTimeToMatch.pop();
+            //if reach the bottom - matched pair
+            if (startTimeToMatch.isEmpty()){
+                newTimeline.add(currentStartTime);
+                newTimeline.add(time);
+            }
+        }
+    }
+    
+    if (newTimeline.get(0) > TimeRange.START_OF_DAY){
+        meetingOptions.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, newTimeline.get(0), false));
+    }
+
+    for (int i = 1; i < newTimeline.size()-2; i += 2) {
+        meetingOptions.add(TimeRange.fromStartEnd(newTimeline.get(i), newTimeline.get(i+1), false));
+    }
+    
+    if (newTimeline.get(newTimeline.size()-1) < TimeRange.END_OF_DAY){
+        meetingOptions.add(TimeRange.fromStartEnd(newTimeline.get(newTimeline.size()-1), TimeRange.END_OF_DAY, true));
+    }
+
+    return meetingOptions;
   }
 }
+    
