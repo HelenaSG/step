@@ -13,7 +13,7 @@ function drawChart() {
 
   const options = {
     'title': 'My Daily Activities',
-    'width': 500,
+    'width': 400,
     'height': 300,
     'colors': ['#ef8f80', '#e6693e', '#ec8f6e', '#f3b49f', '#f6c7b6'],
     'backgroundColor': 'transparent',
