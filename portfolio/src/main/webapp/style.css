@@ -328,9 +328,6 @@ padding-top:2.1vw;
 
 /* chart */
 .centerChart {
-    display: block;
-    margin: auto;
-    align-content: center;
-    margin-bottom: -3%;
-    margin-left: 35%;
+    display: inline-block;
+    text-align: center;
 }
